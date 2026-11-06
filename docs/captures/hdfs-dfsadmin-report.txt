@@ -1,0 +1,62 @@
+﻿Configured Capacity: 2162202353664 (1.97 TB)
+Present Capacity: 1871871565880 (1.70 TB)
+DFS Remaining: 1871871516672 (1.70 TB)
+DFS Used: 49208 (48.05 KB)
+DFS Used%: 0.00%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------
+Live datanodes (2):
+
+Name: 172.22.0.5:9866 (datanode1.scania-platform_default)
+Hostname: datanode1
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 24604 (24.03 KB)
+Non DFS Used: 90173038564 (83.98 GB)
+DFS Remaining: 935935758336 (871.66 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 86.57%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Fri Nov 06 20:18:33 UTC 2026
+Last Block Report: Fri Nov 06 20:17:15 UTC 2026
+Num of Blocks: 1
+
+
+Name: 172.22.0.6:9866 (datanode2.scania-platform_default)
+Hostname: datanode2
+Decommission Status : Normal
+Configured Capacity: 1081101176832 (1006.85 GB)
+DFS Used: 24604 (24.03 KB)
+Non DFS Used: 90173038564 (83.98 GB)
+DFS Remaining: 935935758336 (871.66 GB)
+DFS Used%: 0.00%
+DFS Remaining%: 86.57%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 0
+Last contact: Fri Nov 06 20:18:33 UTC 2026
+Last Block Report: Fri Nov 06 20:17:15 UTC 2026
+Num of Blocks: 1
+
+

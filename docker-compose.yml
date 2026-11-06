@@ -65,3 +65,59 @@ services:
     environment:
       KAFKA_CLUSTERS_0_NAME: scania
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+
+   # ============ COUCHE STOCKAGE : HDFS ============
+
+  namenode:
+    image: apache/hadoop:3.3.6
+    container_name: namenode
+    hostname: namenode
+    user: root   # nécessaire pour écrire dans les volumes Docker
+    command: ["hdfs", "namenode"]
+    ports:
+      - "9870:9870"   # interface web HDFS
+    environment:
+      # Formate le NameNode uniquement au premier démarrage
+      ENSURE_NAMENODE_DIR: /hadoop/dfs/name
+    volumes:
+      - namenode_data:/hadoop/dfs
+      - ./infra/hadoop/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./infra/hadoop/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9870/ > /dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  datanode1:
+    image: apache/hadoop:3.3.6
+    container_name: datanode1
+    hostname: datanode1
+    user: root
+    command: ["hdfs", "datanode"]
+    volumes:
+      - datanode1_data:/hadoop/dfs   # volume distinct (exigence)
+      - ./infra/hadoop/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./infra/hadoop/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+    depends_on:
+      namenode:
+        condition: service_healthy
+
+  datanode2:
+    image: apache/hadoop:3.3.6
+    container_name: datanode2
+    hostname: datanode2
+    user: root
+    command: ["hdfs", "datanode"]
+    volumes:
+      - datanode2_data:/hadoop/dfs   # volume distinct (exigence)
+      - ./infra/hadoop/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml:ro
+      - ./infra/hadoop/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml:ro
+    depends_on:
+      namenode:
+        condition: service_healthy
+volumes:
+  namenode_data:
+  datanode1_data:
+  datanode2_data:        
