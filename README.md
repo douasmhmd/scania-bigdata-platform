@@ -8,7 +8,7 @@ Pipeline Big Data de bout en bout sur données industrielles réelles : ingestio
 
 ![Architecture du livrable 1](docs/architecture/architecture-s1.drawio.png)
 
-Source modifiable : [`architecture-s1.drawio`](docs/architecture/architecture-s1.drawio), à ouvrir sur [app.diagrams.net](https://app.diagrams.net) (glisser-déposer le fichier) ou dans VS Code avec l'extension Draw.io Integration.
+Source modifiable de l'architecture (Mermaid) : [`docs/architecture/README.md`](docs/architecture/README.md).
 ## Stack et versions
 
 | Couche | Technologie | Version | Rôle |
