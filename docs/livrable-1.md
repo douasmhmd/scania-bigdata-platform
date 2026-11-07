@@ -75,10 +75,10 @@ La répartition inégale entre partitions s'explique par le faible nombre de cl�
 
 | Membre | Contributions |
 |---|---|
-| Mohamed Douas | À compléter |
-| Prénom Nom | À compléter |
-| Prénom Nom | À compléter |
-| Prénom Nom | À compléter |
+| Mohamed Douas | Conception de l'architecture et choix techniques (Kafka KRaft, HDFS, Spark standalone)<br>Mise en place du cluster Docker Compose : Kafka, création des topics et Kafka UI ; HDFS (1 NameNode, 2 DataNodes, réplication 2) ; Spark (1 master, 2 workers, 1 client)<br>Développement du producteur Kafka : tri par horloge de flotte avec DuckDB, contrat d'événement JSON versionné, idempotence et compression<br>Tests de validation (réplication HDFS, job Spark vers HDFS) et résolution des incidents d'infrastructure<br>Figure d'architecture et README de lancement |
+| Omar Boulahjour | Test de reproductibilité sur une machine vierge en suivant le README, et corrections associées<br>Vérification des preuves d'exécution et des liens de la documentation<br>Description du dataset : variables, licence, découpage officiel train / validation / test<br>Relecture du code et de la configuration |
+| Travail commun | Points d'intégration hebdomadaires, validation de l'architecture, préparation de la démonstration |
+
 
 ## 8. Prochaine étape (semaine 2)
 
