@@ -35,8 +35,10 @@ flowchart LR
     SC -->|soumission des jobs| SM
     SM --> W1
     SM --> W2
-    W1 & W2 -->|lecture / ecriture| NN
-    NN --- DN1
+    W1 & W2 -->|metadonnees| NN
+    W1 & W2 -->|blocs de donnees| DN1
+    W1 & W2 --> DN2
+    NN ---|gestion des repliques RF=2| DN1
     NN --- DN2
     T1 -.->|source streaming| SS
     SS -.->|archivage Parquet| NN
