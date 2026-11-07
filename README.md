@@ -2,14 +2,13 @@
 
 Pipeline Big Data de bout en bout sur données industrielles réelles : ingestion d'événements avec **Kafka**, stockage distribué **HDFS**, traitements **Spark** (SQL, Structured Streaming, MLlib) et prédiction en temps réel des réparations d'un composant moteur de camions Scania.
 
-Projet du module Big Data – ESI Rabat – Pr. El Ghali Btihal.
+
 
 ## Architecture (livrable 1)
 
-![Architecture du livrable 1](docs/architecture/architecture-s1.png)
+![Architecture du livrable 1](docs/architecture/architecture-s1.drawio.png)
 
-Source modifiable : [`docs/architecture/architecture-s1.drawio`](docs/architecture/architecture-s1.drawio) (à ouvrir sur [app.diagrams.net](https://app.diagrams.net)).
-
+Source modifiable : [`architecture-s1.drawio.png`](docs/architecture/architecture-s1.drawio.png) contient le diagramme draw.io intégré ; il s'ouvre et se modifie directement sur [app.diagrams.net](https://app.diagrams.net).
 ## Stack et versions
 
 | Couche | Technologie | Version | Rôle |
