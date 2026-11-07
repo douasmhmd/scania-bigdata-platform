@@ -1,0 +1,10 @@
+NAME             IMAGE                           COMMAND                  SERVICE          CREATED        STATUS                    PORTS
+datanode1        apache/hadoop:3.3.6             "/usr/local/bin/dumb…"   datanode1        13 hours ago   Up 56 minutes             
+datanode2        apache/hadoop:3.3.6             "/usr/local/bin/dumb…"   datanode2        13 hours ago   Up 56 minutes             
+kafka            apache/kafka:3.9.0              "/__cacert_entrypoin…"   kafka            14 hours ago   Up 56 minutes (healthy)   0.0.0.0:9092->9092/tcp
+kafka-ui         provectuslabs/kafka-ui:v0.7.2   "/bin/sh -c 'java --…"   kafka-ui         14 hours ago   Up 55 minutes             0.0.0.0:8085->8080/tcp
+namenode         apache/hadoop:3.3.6             "/usr/local/bin/dumb…"   namenode         13 hours ago   Up 56 minutes (healthy)   0.0.0.0:9870->9870/tcp
+spark-client     apache/spark:3.5.3              "/opt/entrypoint.sh …"   spark-client     12 hours ago   Up 56 minutes             
+spark-master     apache/spark:3.5.3              "/opt/entrypoint.sh …"   spark-master     12 hours ago   Up 56 minutes             0.0.0.0:7077->7077/tcp, 0.0.0.0:8080->8080/tcp
+spark-worker-1   apache/spark:3.5.3              "/opt/entrypoint.sh …"   spark-worker-1   12 hours ago   Up 56 minutes             0.0.0.0:8081->8081/tcp
+spark-worker-2   apache/spark:3.5.3              "/opt/entrypoint.sh …"   spark-worker-2   12 hours ago   Up 56 minutes             0.0.0.0:8082->8082/tcp

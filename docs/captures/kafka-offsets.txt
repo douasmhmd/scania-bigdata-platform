@@ -1,0 +1,3 @@
+scania.readouts:0:721
+scania.readouts:1:311
+scania.readouts:2:337

@@ -1,0 +1,2 @@
+confluent-kafka==2.6.1
+duckdb==1.1.3

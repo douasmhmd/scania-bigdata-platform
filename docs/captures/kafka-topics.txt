@@ -1,0 +1,8 @@
+Topic: scania.readouts	TopicId: YgtNpGq6SiCSS_Bc3a01UA	PartitionCount: 3	ReplicationFactor: 1	Configs: retention.ms=1209600000,retention.bytes=1073741824
+	Topic: scania.readouts	Partition: 0	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: scania.readouts	Partition: 1	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: scania.readouts	Partition: 2	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+Topic: scania.alerts	TopicId: gqrYGPlxS6m08f_OPr1XBw	PartitionCount: 3	ReplicationFactor: 1	Configs: 
+	Topic: scania.alerts	Partition: 0	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: scania.alerts	Partition: 1	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: scania.alerts	Partition: 2	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 

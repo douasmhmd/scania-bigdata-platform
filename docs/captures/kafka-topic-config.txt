@@ -1,0 +1,3 @@
+Dynamic configs for topic scania.readouts are:
+  retention.bytes=1073741824 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:retention.bytes=1073741824, DEFAULT_CONFIG:log.retention.bytes=-1}
+  retention.ms=1209600000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:retention.ms=1209600000}

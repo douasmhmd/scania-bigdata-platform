@@ -36,8 +36,7 @@ services:
       retries: 10
       start_period: 20s
 
-  # Création des topics, puis arrêt du conteneur
-    # Création des topics, puis arrêt du conteneur
+    # Creation des topics, puis arret du conteneur
   kafka-init:
     image: apache/kafka:3.9.0
     container_name: kafka-init
@@ -50,6 +49,7 @@ services:
         set -e
         /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:29092 --create --if-not-exists --topic scania.readouts --partitions 3 --replication-factor 1
         /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:29092 --create --if-not-exists --topic scania.alerts --partitions 3 --replication-factor 1
+        /opt/kafka/bin/kafka-configs.sh --bootstrap-server kafka:29092 --alter --entity-type topics --entity-name scania.readouts --add-config retention.bytes=1073741824,retention.ms=1209600000
         /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:29092 --describe --exclude-internal
     restart: "no"
 
@@ -65,6 +65,17 @@ services:
     environment:
       KAFKA_CLUSTERS_0_NAME: scania
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+
+    # Producteur : rejoue les releves SCANIA dans Kafka (lance a la demande)
+  producer:
+    build: ./ingestion
+    image: scania-producer:1.0
+    profiles: ["tools"]   # non demarre par "docker compose up" : on le lance avec "run"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./data/raw/2024-34-3/data:/data:ro   # CSV lus directement, en lecture seule    
 
    # ============ COUCHE STOCKAGE : HDFS ============
 
