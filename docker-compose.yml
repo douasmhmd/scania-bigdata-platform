@@ -4,12 +4,14 @@ services:
   # ============ COUCHE INGESTION ============
 
   # Broker Kafka en mode KRaft (sans ZooKeeper)
+    # Broker Kafka en mode KRaft (sans ZooKeeper)
   kafka:
     image: apache/kafka:3.9.0
     container_name: kafka
     hostname: kafka
+    user: root   # necessaire pour ecrire dans le volume Docker
     ports:
-      - "9092:9092"   # accès depuis Windows (tests, producteur local)
+      - "9092:9092"   # acces depuis Windows (tests, producteur local)
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -21,14 +23,18 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
-      # Les topics sont créés explicitement par kafka-init, jamais automatiquement
+      # Les topics sont crees explicitement par kafka-init, jamais automatiquement
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
-      # Un seul broker : facteurs de réplication internes à 1
+      # Un seul broker : facteurs de replication internes a 1
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_HEAP_OPTS: "-Xms512m -Xmx512m"
+      # Donnees Kafka dans un volume persistant
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    volumes:
+      - kafka_data:/var/lib/kafka/data
     healthcheck:
       test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server kafka:29092 > /dev/null 2>&1"]
       interval: 10s
@@ -194,6 +200,7 @@ services:
     depends_on:
       - spark-master
 volumes:
+  kafka_data:
   namenode_data:
   datanode1_data:
-  datanode2_data:        
+  datanode2_data:       
