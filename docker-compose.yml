@@ -137,7 +137,8 @@ services:
       # ============ COUCHE TRAITEMENT : CLUSTER SPARK ============
 
   spark-master:
-    image: apache/spark:3.5.3
+    build: ./infra/spark
+    image: scania-spark:3.5.3
     container_name: spark-master
     hostname: spark-master
     command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
@@ -151,7 +152,8 @@ services:
       - ./infra/hadoop:/opt/hadoop-conf:ro   # mêmes XML que HDFS : réplication 2
 
   spark-worker-1:
-    image: apache/spark:3.5.3
+    build: ./infra/spark
+    image: scania-spark:3.5.3
     container_name: spark-worker-1
     hostname: spark-worker-1
     command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
@@ -168,7 +170,8 @@ services:
       - spark-master
 
   spark-worker-2:
-    image: apache/spark:3.5.3
+    build: ./infra/spark
+    image: scania-spark:3.5.3
     container_name: spark-worker-2
     hostname: spark-worker-2
     command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
@@ -186,7 +189,8 @@ services:
 
   # Conteneur d'outils : on y lance spark-submit vers le cluster
   spark-client:
-    image: apache/spark:3.5.3
+    build: ./infra/spark
+    image: scania-spark:3.5.3
     container_name: spark-client
     hostname: spark-client
     command: ["tail", "-f", "/dev/null"]   # reste allumé en attente de commandes
