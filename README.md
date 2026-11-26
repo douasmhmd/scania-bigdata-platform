@@ -174,7 +174,31 @@ tests/        tests du cluster (spark_hdfs_smoke.py)
 docs/         architecture, captures, livrables
 data/         données locales, ignorées par Git
 ```
+### 7. Préparer les données et entraîner le modèle (Spark ML)
 
+Une fois tout l'historique archivé dans Bronze (`hdfs dfs -du -s -h /lakehouse/bronze/readouts` affiche environ 695 Mo), arrêter le job Bronze pour libérer le cluster :
+
+```bash
+docker compose restart spark-client
+```
+
+Puis enchaîner, dans l'ordre :
+
+```bash
+# Silver : dedoublonnage, mise a plat des variables, jointure des specifications
+docker exec spark-client /opt/spark/bin/spark-submit --master spark://spark-master:7077 --conf spark.cores.max=4 --conf spark.executor.memory=1500m --conf spark.sql.shuffle.partitions=24 /opt/app/batch/silver.py
+
+# Gold : labels avec censure (horizon 48 pas), decoupage par camion 70/15/15
+docker exec spark-client /opt/spark/bin/spark-submit --master spark://spark-master:7077 --conf spark.cores.max=4 --conf spark.executor.memory=1500m --conf spark.sql.shuffle.partitions=24 /opt/app/batch/gold.py
+
+# Comparaison de LR, RF et GBT face a une reference naive
+docker exec spark-client /opt/spark/bin/spark-submit --master spark://spark-master:7077 --conf spark.cores.max=4 --conf spark.executor.memory=1500m --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=24 --py-files /opt/app/batch/ml_common.py /opt/app/batch/train_compare.py
+
+# Tuning du GBT, choix du seuil, evaluation sur le test, sauvegarde du modele (20 a 40 min)
+docker exec spark-client /opt/spark/bin/spark-submit --master spark://spark-master:7077 --conf spark.cores.max=4 --conf spark.executor.memory=1500m --conf spark.driver.memory=2g --conf spark.sql.shuffle.partitions=24 --py-files /opt/app/batch/ml_common.py /opt/app/batch/tune_and_save.py
+```
+
+Le modèle est sauvegardé dans `/models/scania_pdm/v1` (HDFS), avec ses métadonnées dans `/models/scania_pdm/v1_metadata`.
 ## Feuille de route
 
 | Semaine | Objectif | État |
