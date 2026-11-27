@@ -1,0 +1,28 @@
++----------------------+----+-----+----+------+---------+------+------+------+
+|modele                |TP  |FP   |FN  |TN    |precision|rappel|f1    |pr_auc|
++----------------------+----+-----+----+------+---------+------+------+------+
+|Reference (toujours 0)|0   |0    |4174|133859|0.0      |0.0   |0.0   |NULL  |
+|GBT regle (seuil 0.75)|1767|11504|2407|122355|0.1331   |0.4233|0.2026|0.1264|
++----------------------+----+-----+----+------+---------+------+------+------+
+
+{
+  "version": "v1",
+  "algorithme": "GBTClassifier",
+  "maxDepth": 4,
+  "maxIter": 30,
+  "seuil": 0.75,
+  "horizon_pas_de_temps": 48,
+  "variables_numeriques": 106,
+  "variables_categorielles": 8,
+  "metriques_test": {
+    "modele": "GBT regle (seuil 0.75)",
+    "TP": 1767,
+    "FP": 11504,
+    "FN": 2407,
+    "TN": 122355,
+    "precision": 0.1331,
+    "rappel": 0.4233,
+    "f1": 0.2026,
+    "pr_auc": 0.1264
+  }
+}

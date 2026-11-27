@@ -203,8 +203,28 @@ services:
       - ./tests:/opt/app/tests
     depends_on:
       - spark-master
+  # ============ COUCHE RESTITUTION ============
+
+  postgres:
+    image: postgres:16.4-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_DB: scania
+      POSTGRES_USER: scania
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Definir POSTGRES_PASSWORD dans .env}
+    ports:
+      - "5434:5432"   # 5434 cote Windows : 5432/5433 souvent deja pris
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scania -d scania"]
+      interval: 10s
+      timeout: 5s
+      retries: 10      
 volumes:
   kafka_data:
   namenode_data:
   datanode1_data:
-  datanode2_data:       
+  datanode2_data:
+  postgres_data:      
